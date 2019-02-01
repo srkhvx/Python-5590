@@ -52,4 +52,7 @@ def Question3():
         line = infile.readline()
 
 if __name__ == '__main__':
+    #Question1a is using static numbers but Question1b is more dynamic. I kept both for the tutor to view
+    Question1b()
+    Question2()
     Question3()
