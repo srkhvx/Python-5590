@@ -29,15 +29,18 @@ class BankAccount:
         self.totalAmount-=int(input("Enter Amount that you want to withdraw: "))
 
 #Bank Account uses for question 1
-myAccount = BankAccount("Andrew", 0)
+myAccount = BankAccount("Andrew", 500)
+myAccount2 = BankAccount("Andrew", 0)
+
 myAccount.User_deposit()
 myAccount.User_withdrawal()
-myAccount.deposit(300)
-myAccount.deposit(250)
-myAccount.withdrawal(100)
-myAccount.deposit(50)
-
 print(myAccount.totalAmount)
+
+myAccount2.deposit(300)
+myAccount2.deposit(250)
+myAccount2.withdrawal(100)
+myAccount2.deposit(50)
+print(myAccount2.totalAmount)
 
 #Question 2: Initialize our list of tuples and an empty dictionary
 listofTuples = [( 'John', ('Physics', 80)), ( 'Daniel', ('Science', 90)), ('John', ('Science', 95)), ('Mark',('Maths', 100)), ('Daniel', ('History', 75)), ('Mark', ('Social', 95))]
@@ -62,18 +65,17 @@ notCommon = []
 temp=""
 print("Current Python Students: ", pythonStudents)
 while temp!="x":
-    temp=str(input("Please Enter Name of Student in Python else enter x: "))
+    temp=str(input("Please Enter Name of Student to add in Python else enter x: "))
     if temp!="x":
         pythonStudents.append(temp)
 print("Current Python Students: ", pythonStudents)
-print("Current WebApp Students: ", webAppStudents)
 temp=""
 while temp!="x":
-    temp=str(input("Please Enter Name of Student in webApp else enter x: "))
+    temp=str(input("Please Enter Name of Student to add in webApp else enter x: "))
     if temp!="x":
         webAppStudents.append(temp)
 print("Current WebApp Students: ", webAppStudents)
-#for eeach person in our first class
+#for each person in our first class
 for person in webAppStudents:
     #if that person is in the second class
     if person in pythonStudents:
@@ -94,30 +96,25 @@ print("Students in Both Classes: ",both,"\n","Students Not Common in both Classe
 #Question 4:
 #enter any string from the console
 inputString = input("enter a string\n")
-
-#grab first character in string
-string = inputString[0]
-#length will be at least 1
-length = 1
+length = 0
 #add the first character to our dictionary of string and length
-stringDict = {1: inputString[0]}
-
-#for each character in our input string starting with the second character
-for x in range(1, len(inputString)):
-    #if character is not the same as the last
-    if inputString[x] != inputString[x-1]:
-        #add that character to our string
-        string += inputString[x]
-        #increase the length by 1
-        length+=1
-        #otherwise
+stringDict = {}
+chars = ""
+#for each character in our string
+for x in inputString:
+    #if the character is not in our string...
+    if x not in chars:
+        #add it to the string and add length by 1
+        chars += x
+        length += 1
+    #if the character is in our string, reset our string to the current character and the length to 1
     else:
-        #reset length to 1
+        chars = x
         length = 1
-        #reset search string to our current character
-        string = inputString[x]
-    #add our current string and length to our dictionary
-    stringDict[length] = string
+        stringDict[0] = chars
+        #always add iteration to our dictionary
+    stringDict[length] = chars
+
 
 #print out the entry with the highest length in our dictionary
 print("Max Substring length: ",max(stringDict)," Max Substring being: ", stringDict[max(stringDict)])
@@ -140,11 +137,11 @@ class Employee(Person):
     dept = ""
 
     #constructor setting id and dept
-    def __init__(self, id, dept):
+    def __init__(self, id, dept, name):
         self.id = id
         self.dept = dept
         #super call to Person class
-        super(Person, self).__init__()
+        super().__init__(name)
 #Pilot class derived from Employee
 #Class 3
 class Pilot(Employee):
@@ -152,10 +149,10 @@ class Pilot(Employee):
     license_number = 0
 
     #constructor setting license
-    def __init__(self, license):
+    def __init__(self, license, dept, name):
         self.license_number = license
         #super call to Employee class
-        super(Employee, self).__init__()
+        super().__init__(license, dept, name)
 #Passenger class derived from Person
 #Class 4
 class Passenger(Person):
@@ -164,10 +161,10 @@ class Passenger(Person):
     __credit_card_num = 0
 
     #constructor setting flight number
-    def __init__(self, flight_number):
+    def __init__(self, flight_number, name):
         self.flight_number = flight_number
         #super call to Person class
-        super(Person, self).__init__()
+        super().__init__(name)
 
     #add card number method
     def add_card(self, card):
@@ -177,7 +174,7 @@ class Passenger(Person):
 class Flight:
     #Flight class variables
     number = 0
-    pilot = ""
+    pilot = None
     passengers =[]
 
     #constructor setting number and pilot
@@ -188,6 +185,14 @@ class Flight:
     #method adding passenger to list of passengers
     def add_passenger(self, passenger):
         self.passengers.append(passenger)
+
+contractor = Person("Hank")
+stewardess1 = Employee(122, "Cabin4", "Jane")
+pilot1 = Pilot(1223, "Pilot", "Hank")
+passenger1 = Passenger(3, "Susan")
+flight3 = Flight(3, pilot1)
+
+
 
 #Question 6:
 #input search term
